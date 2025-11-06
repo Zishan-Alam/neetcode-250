@@ -1,87 +1,113 @@
-// ✅ BFS
+// ✅ TOP VIEW OF BINARY TREE
+// -----------------------------------------------------------
+// Author: Zishan Alam Khan
+// Approach: Level Order (BFS) + Horizontal Distance Tracking
+// -----------------------------------------------------------
+
 class Solution {
 public:
-    // Helper function to find leftmost and rightmost horizontal distance
-    void find(TreeNode* root, int pos, int &l, int &r) {
-        if(!root) return;
+
+    // -----------------------------------------------------------
+    // Helper Function:
+    // Find leftmost (l) and rightmost (r) horizontal boundaries.
+    // -----------------------------------------------------------
+    void findBoundary(TreeNode* root, int pos, int &l, int &r) {
+        if (!root) return;
+
         l = min(l, pos);
         r = max(r, pos);
-        find(root->left, pos - 1, l, r);
-        find(root->right, pos + 1, l, r);
+
+        findBoundary(root->left, pos - 1, l, r);
+        findBoundary(root->right, pos + 1, l, r);
     }
 
+    // -----------------------------------------------------------
+    // Main Function: Return Top View of Binary Tree
+    // -----------------------------------------------------------
     vector<int> topView(TreeNode* root) {
-        if(!root) return {};
+        if (!root) return {};
 
-        // Step 1️⃣: Find the leftmost and rightmost horizontal distance
+        // Step 1️⃣: Find boundaries (horizontal distance range)
         int l = 0, r = 0;
-        find(root, 0, l, r);
+        findBoundary(root, 0, l, r);
 
         int width = r - l + 1;
-        vector<int> res(width);
-        vector<bool> visited(width, false);
+        vector<int> res(width, INT_MIN);
 
-        // Step 2️⃣: BFS traversal with horizontal distance
-        queue<pair<TreeNode*, int>> que;  // {node, horizontal distance index}
-        que.push({root, -l});
+        // Step 2️⃣: BFS Traversal (Level Order)
+        queue<pair<TreeNode*, int>> q;
+        q.push({root, -l}); // Normalize so leftmost = 0
 
-        while(!que.empty()) {
-            auto [node, pos] = que.front(); 
-            que.pop();
+        while (!q.empty()) {
+            auto [node, pos] = q.front();
+            q.pop();
 
-            // Step 3️⃣: Record first node seen at this position (top view)
-            if(!visited[pos]) {
-                visited[pos] = true;
-                res[pos] = node->data;
-            }
+            // Top View logic:
+            // Fill only first time (top-most node)
+            if (res[pos] == INT_MIN)
+                res[pos] = node->val;
 
-            // Step 4️⃣: Move left and right in horizontal distance
-            if(node->left)  que.push({node->left, pos - 1});
-            if(node->right) que.push({node->right, pos + 1});
+            if (node->left) q.push({node->left, pos - 1});
+            if (node->right) q.push({node->right, pos + 1});
         }
 
+        // Step 3️⃣: Return result
         return res;
     }
 };
 
+
 /*
-🧠 Intuition:
-Each node in a binary tree can be assigned a **horizontal distance (HD)**:
-- Root = 0
-- Left child = HD - 1
-- Right child = HD + 1
+------------------------------------------------------------
+🧠 INTUITION (Roman Hindi):
+------------------------------------------------------------
+Top view ka matlab — agar tree ko upar se dekho,
+to har vertical column me sabse upar ka node kaunsa dikhega.
 
-Top view = first node visible at each horizontal distance (from top).
-We perform BFS to ensure topmost nodes are seen first for each HD.
+Har node ko ek horizontal position (pos) assign karte hain:
+→ Left child: pos - 1  
+→ Right child: pos + 1  
 
-📘 Approach:
-1️⃣ Use DFS to find how far left and right the tree goes (min and max HD).
-2️⃣ Use BFS to traverse level by level, tracking HD.
-3️⃣ For each HD, record the first node encountered (topmost).
-4️⃣ Return nodes in order from leftmost to rightmost HD.
+Ab BFS (level order) traversal karte hain.
+Kyuki BFS upar se neeche jaata hai, pehle level ka node
+sabse upar hota hai.  
+Isliye hum pehli baar `res[pos]` fill karte hain aur 
+uske baad overwrite **nahi** karte.
 
-🧩 Dry Run Example:
+------------------------------------------------------------
+🔍 DRY RUN EXAMPLE:
+------------------------------------------------------------
 Tree:
         1
        / \
       2   3
-       \
-        4
-         \
-          5
-           \
-            6
+       \   \
+        5   4
 
-HD map:
-1(0), 2(-1), 3(+1), 4(0), 5(+1), 6(+2)
+Traversal:
+1️⃣ Root(1, pos=0) → res[0]=1  
+   Queue = [(2,-1), (3,1)]
 
-Top view → [2, 1, 3, 6]
+2️⃣ Node(2, pos=-1) → res[-1-l]=res[0]=2  
+   Queue = [(3,1), (5,0)]
 
-⏱️ Time Complexity: O(N)
-Each node is processed once.
+3️⃣ Node(3, pos=1) → res[1-l]=res[2]=3  
+   Queue = [(5,0), (4,2)]
 
-💾 Space Complexity: O(N)
-For queue + result storage.
+4️⃣ Node(5, pos=0) → Already filled → skip  
+   Queue = [(4,2)]
+
+5️⃣ Node(4, pos=2) → res[3]=4
+
+✅ Final Top View = [2, 1, 3, 4]
+
+------------------------------------------------------------
+⏱️ TIME COMPLEXITY:
+O(N) → Har node ek baar visit hoti hai (BFS traversal)
+
+💾 SPACE COMPLEXITY:
+O(W) → Queue + Result vector (W = tree ki width)
+------------------------------------------------------------
 */
 
 ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
