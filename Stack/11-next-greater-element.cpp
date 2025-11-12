@@ -6,6 +6,8 @@ public:
         stack<int> st;            // stack me index store karenge
 
         for (int i = 0; i < n; i++) {
+            // Jab current element bada hai stack ke top se,
+            // to iska matlab current element hi uska Next Greater hai
             while (!st.empty() && nums[i] > nums[st.top()]) {
                 ans[st.top()] = nums[i];
                 st.pop();
