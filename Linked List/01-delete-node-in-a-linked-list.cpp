@@ -1,73 +1,65 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
+        // Important condition: node should not be tail
+        if(node && node->next) {
 
-        // prev pointer track karega second last node ko
-        ListNode* prev = nullptr;
+            // Copy next node's value into current node
+            node->val = node->next->val;
 
-        // Jab tak next node exist karta hai,
-        // current node ka value next wale node se copy karte jao
-        while(node->next) {
-
-            prev = node;                     // previous ko store karo
-            node->val = node->next->val;     // next node ka value copy karo
-            node = node->next;               // aage badho
+            // Skip over the next node → delete it logically
+            node->next = node->next->next;
         }
-
-        // Ab hum last node par aagaye
-        // prev second-last node par hai
-        prev->next = nullptr;                // last node ko list se hatao
-        delete(node);                         // last node ko free kar do
     }
 };
 
 
-
 /*
-===========================
+=========================================
 🔥 Intuition (Roman Hindi)
-===========================
-Bhai, yaha problem ye hai ki hum jis node ko delete karna chahte hain,
-uska previous node nahi mil sakta. Isliye hum ek trick use karte hain:
+=========================================
+Bhai is problem me ek twist hai:
+Hume **delete karna wo node hai jis ka pointer diya hua hai, 
+par uske previous node ka pointer nahi diya**.
 
-- jis node ko delete karna hai, usme "next node ka value" copy kar do.
-- phir pointer ko aage badhate jao aur value copy karte jao.
-- jab last node par pahunch jao, usko simply prev->next = NULL karke delete kar do.
+Normal delete me hum previous node se link todte.
+Par yaha previous access nahi hai.
 
-Is tarike se hum bina previous pointer ke node ko delete kar sakte hain.
+⚡ Trick:
+- next node ka value current node me copy kar do
+- current->next ko next->next se connect kar do
 
-====================================
-🧪 Dry Run
-List: 4 → 5 → 1 → 9
-delete node = 5
-====================================
+Isse next node delete ho jati hai,
+aur current node logically "replace" ho jata hai.
+Is tarah se aisa lagta hai ki current node delete ho gaya.
 
-Step 1:
-node = 5
-copy 1 → list becomes: 4 → 1 → 1 → 9
+=========================================
+🧪 Dry Run Example
+List: 4 → 5 → 1 → 9  
+Given node = 5 (isko delete karna hai)
 
-Step 2:
-node = 1 (2nd)
-copy 9 → list becomes: 4 → 1 → 9 → 9
+Step 1: node->val = node->next->val  
+         5 → 1 बन गया  
 
-Step 3:
-node = 9 (3rd)
-node->next = NULL → loop stops
+List: 4 → 1 → 1 → 9
 
-prev = 2nd last node
-prev->next = NULL
-delete(last)
+Step 2: node->next = node->next->next  
+         1 → next = 9
 
-Final list: 4 → 1 → 9
+Final list:
+4 → 1 → 9
 
-===========================
+Middle node effectively delete ho gayi.
+
+=========================================
 ⏱️ Time Complexity
-===========================
-O(n) — last node tak traverse karna padta hai.
+=========================================
+O(1) — sirf constant operations.
 
-===========================
+=========================================
 💾 Space Complexity
-===========================
-O(1) — constant space only.
+=========================================
+O(1) — koi extra space nahi.
 
 */
+
