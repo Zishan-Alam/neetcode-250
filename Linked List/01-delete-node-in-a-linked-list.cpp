@@ -3,10 +3,7 @@ public:
     void deleteNode(ListNode* node) {
         // Important condition: node should not be tail
         if(node && node->next) {
-
-            // Copy next node's value into current node
             node->val = node->next->val;
-
             // Skip over the next node → delete it logically
             node->next = node->next->next;
         }
