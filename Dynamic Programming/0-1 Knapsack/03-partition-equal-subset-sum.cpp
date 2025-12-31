@@ -1,3 +1,5 @@
+// same as subset sum but pehle check karte hai sum odd ha ya even, if odd hai then not possible to divide, agar even hai to sum/2 karke subsetsum call karenge
+
 class Solution {
 public:
 
