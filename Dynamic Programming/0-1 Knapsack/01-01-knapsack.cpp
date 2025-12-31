@@ -24,3 +24,34 @@ class Solution {
 
 // Time: O(n * W)
 // Space: O(n * W)
+
+
+// Top Down
+class Solution {
+public:
+    vector<vector<int>> t;
+
+    int solve(int W, vector<int> &val, vector<int> &wt, int n) {
+        // Base case
+        if(n == 0 || W == 0) return 0;
+
+        // Memoization check
+        if(t[n][W] != -1) return t[n][W];
+
+        // Choice diagram
+        if(wt[n-1] <= W) {
+            return t[n][W] = max(
+                val[n-1] + solve(W - wt[n-1], val, wt, n-1),
+                solve(W, val, wt, n-1)
+            );
+        } else {
+            return t[n][W] = solve(W, val, wt, n-1);
+        }
+    }
+
+    int knapsack(int W, vector<int> &val, vector<int> &wt) {
+        int n = wt.size();
+        t.assign(n+1, vector<int>(W+1, -1));
+        return solve(W, val, wt, n);
+    }
+};
