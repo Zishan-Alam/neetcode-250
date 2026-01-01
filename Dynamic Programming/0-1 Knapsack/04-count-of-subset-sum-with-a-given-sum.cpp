@@ -1,3 +1,30 @@
+/*
+==============================
+3) Count of Subsets with Given Sum
+==============================
+
+Problem Statement:
+Tumhe ek integer array aur ek value "sum" di gayi hai.
+Batana hai kitne different subsets ka sum
+exactly "sum" ke barabar aata hai.
+
+Order matter nahi karta.
+
+Input:
+nums = [2, 3, 5, 6, 8, 10]
+sum = 10
+
+Output:
+3
+
+Explanation:
+Valid subsets:
+{10}
+{2, 8}
+{?}  → total 3 subsets
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
