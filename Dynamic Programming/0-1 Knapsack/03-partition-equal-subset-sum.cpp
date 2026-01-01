@@ -1,3 +1,29 @@
+/*
+==============================
+2) Equal Sum Partition
+(LeetCode 416)
+==============================
+
+Problem Statement:
+Tumhe ek integer array diya gaya hai.
+Check karo kya array ko 2 subsets me divide kiya ja sakta hai
+aise ki dono subsets ka sum equal ho.
+
+Har element sirf ek subset me hi ja sakta hai.
+
+Input:
+nums = [1, 5, 11, 5]
+
+Output:
+true
+
+Explanation:
+Subset {1, 5, 5} ka sum = 11
+Subset {11} ka sum = 11
+Dono equal hain.
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
