@@ -1,3 +1,28 @@
+/*
+==============================
+4) Minimum Subset Sum Difference
+==============================
+
+Problem Statement:
+Tumhe ek integer array diya gaya hai.
+Is array ko 2 subsets me divide karna hai
+aise ki dono subsets ke sums ka
+absolute difference minimum ho.
+
+Input:
+nums = [1, 6, 11, 5]
+
+Output:
+1
+
+Explanation:
+Possible partition:
+Subset1 = {1, 5, 6} → sum = 12
+Subset2 = {11}      → sum = 11
+Difference = |12 - 11| = 1 (minimum)
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
