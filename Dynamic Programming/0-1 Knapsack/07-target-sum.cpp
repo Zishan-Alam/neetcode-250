@@ -1,3 +1,33 @@
+/*
+==============================
+6) Target Sum
+(LeetCode 494)
+==============================
+
+Problem Statement:
+Tumhe ek array diya gaya hai.
+Har element ke aage ya to '+' lagana hai
+ya '-' lagana hai.
+
+Batana hai kitne different ways me
+expression ka result exactly "target" ban sakta hai.
+
+Input:
+nums = [1,1,1,1,1]
+target = 3
+
+Output:
+5
+
+Explanation:
++1 -1 +1 +1 +1 = 3
++1 +1 -1 +1 +1 = 3
++1 +1 +1 -1 +1 = 3
++1 +1 +1 +1 -1 = 3
+-1 +1 +1 +1 +1 = 3
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
