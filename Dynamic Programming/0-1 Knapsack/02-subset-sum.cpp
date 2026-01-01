@@ -1,3 +1,29 @@
+/*
+==============================
+1) Subset Sum Problem
+==============================
+
+Problem Statement:
+Tumhe ek integer array diya gaya hai aur ek value "sum".
+Batana hai kya aisa koi subset exist karta hai
+jiska total sum exactly "sum" ke barabar ho.
+
+Har element ko ya to include kar sakte ho
+ya ignore kar sakte ho (0/1 choice).
+
+Input:
+nums = [2, 3, 7, 8, 10]
+sum = 11
+
+Output:
+true
+
+Explanation:
+Subset {3, 8} ka sum = 11
+Isliye answer true hai.
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
