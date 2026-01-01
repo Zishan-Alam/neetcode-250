@@ -1,3 +1,31 @@
+/*
+==============================
+5) Count Subsets with Given Difference
+==============================
+
+Problem Statement:
+Tumhe ek array aur ek integer "diff" diya gaya hai.
+Batana hai kitne aise ways hain
+jisme array ko 2 subsets me divide karein
+aur dono subsets ke sums ka difference
+exactly "diff" ho.
+
+Input:
+arr = [1, 1, 2, 3]
+diff = 1
+
+Output:
+3
+
+Explanation:
+Valid partitions:
+({1,1,2}, {3})
+({1,3}, {1,2})
+({1,3}, {1,2})
+Total 3 ways.
+*/
+
+
 // Bottom-Up DP (Tabulation)
 class Solution {
 public:
