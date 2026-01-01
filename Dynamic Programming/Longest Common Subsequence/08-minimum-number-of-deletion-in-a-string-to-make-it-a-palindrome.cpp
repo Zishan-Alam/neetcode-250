@@ -1,4 +1,5 @@
-/*
+/* Minimum deletions to palindrome = Length - LPS
+
 ====================================================
 Minimum Deletions to Make a String Palindrome
 ====================================================
