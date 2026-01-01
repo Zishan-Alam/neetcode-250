@@ -1,4 +1,5 @@
-/*
+/* Longest Palindromic Subsequence = LCS(string, reverse(string))
+
 ===================================
 Longest Palindromic Subsequence (LPS)
 ===================================
